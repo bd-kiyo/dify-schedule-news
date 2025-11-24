@@ -2,43 +2,14 @@ name: Auto
 
 on:
   schedule:
-    - cron: "0 22 * * 0,2,4" # 日本時間：毎週月曜・水曜・金曜の午前7時（UTC: 日曜・火曜・木曜22時）
-    #- cron: "20 20 * * *" # 日本時間：毎日午前5時（UTC: 毎日20時20分）
-
+    - cron: "0 22 * * 0,2,4" # 日本時間：毎週月曜・水曜・金曜の午前7時
   workflow_dispatch:
 
 jobs:
   DifyWorkflow:
-    if: github.event.schedule == '0 22 * * 0,4' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
       DIFY_TOKENS: ${{ secrets.DIFY_TOKENS }}
-      DIFY_BASE_URL: ${{ secrets.DIFY_BASE_URL }}
-      DIFY_INPUTS: ${{ secrets.DIFY_INPUTS }}
-      EMAIL_USER: ${{ secrets.EMAIL_USER }}
-      EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-      EMAIL_TO: ${{ secrets.EMAIL_TO }}
-      DINGDING_WEBHOOK: ${{ secrets.DINGDING_WEBHOOK }}
-      PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-      WEIXIN_WEBHOOK: ${{ secrets.WEIXIN_WEBHOOK }}
-      SERVERPUSHKEY: ${{ secrets.SERVERPUSHKEY }}
-      FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
-      AIBOTK_KEY: ${{ secrets.AIBOTK_KEY }}
-      AIBOTK_ROOM_RECIVER: ${{ secrets.AIBOTK_ROOM_RECIVER }}
-      AIBOTK_CONTACT_RECIVER: ${{ secrets.AIBOTK_CONTACT_RECIVER }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: Run Project
-        run: |
-          yarn
-          yarn workflowDify
-
-  DifyWorkflowAlternate:
-    if: github.event.schedule == '20 20 * * *' 
-    runs-on: ubuntu-latest
-    env:
-      DIFY_TOKENS: ${{ secrets.DIFY_TOKENS_ALTERNATE }}
       DIFY_BASE_URL: ${{ secrets.DIFY_BASE_URL }}
       DIFY_INPUTS: ${{ secrets.DIFY_INPUTS }}
       EMAIL_USER: ${{ secrets.EMAIL_USER }}
